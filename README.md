@@ -1,6 +1,6 @@
-# xpip-cu - Instalador de paquetes Python para Cuba 🇨🇺
+# xcu - Instalador de paquetes Python para Cuba 🇨🇺
 
-`xpip-cu` es un wrapper de pip que facilita la instalación de paquetes de Python desde el repositorio PyPI de Cuba, eliminando la necesidad de escribir comandos largos con parámetros de configuración.
+`xcu` es un wrapper de pip que facilita la instalación de paquetes de Python desde el repositorio PyPI de Cuba, eliminando la necesidad de escribir comandos largos con parámetros de configuración.
 
 ## Características
 
@@ -8,56 +8,55 @@
 - ✅ Interfaz simple y familiar (como pip)
 - ✅ Configuración automática del repositorio cubano
 - ✅ Soporte para todos los comandos de pip
+- ✅ Instalación de paquetes sin gasto de megas
 - ✅ Instalación sencilla
 
 ## Instalación
 
 ### Opción 1: Desde el código fuente
 ```bash
-git clone https://github.com/tuusuario/xpip-cu.git
-cd xpip-cu
+git clone https://github.com/KeimaSenpai/xcu.git
+cd xcu
 pip install .
 ```
 
-### Opción 2: Instalación en modo desarrollo
+### Opción 2: Instalación desde pypi
 ```bash
-git clone https://github.com/tuusuario/xpip-cu.git
-cd xpip-cu
-pip install -e .
+pip install xcu
 ```
 
 ## Uso
 
-Una vez instalado, puedes usar `xpip-cu` como si fuera `pip`:
+Una vez instalado, puedes usar `xcu` como si fuera `pip`:
 
 ### Instalar un paquete
 ```bash
-xpip-cu install requests
+xcu install requests
 ```
 
 ### Instalar múltiples paquetes
 ```bash
-xpip-cu install numpy pandas matplotlib
+xcu install numpy pandas matplotlib
 ```
 
 ### Instalar desde requirements.txt
 ```bash
-xpip-cu install -r requirements.txt
+xcu install -r requirements.txt
 ```
 
 ### Otros comandos (funcionan igual que pip)
 ```bash
-xpip-cu list                    # Listar paquetes instalados
-xpip-cu show requests           # Mostrar información de un paquete
-xpip-cu uninstall requests      # Desinstalar un paquete
-xpip-cu --help                  # Mostrar ayuda
+xcu list                    # Listar paquetes instalados
+xcu show requests           # Mostrar información de un paquete
+xcu uninstall requests      # Desinstalar un paquete
+xcu --help                  # Mostrar ayuda
 ```
 
 ## ¿Qué hace por detrás?
 
 Cuando ejecutas:
 ```bash
-xpip-cu install requests
+xcu install requests
 ```
 
 En realidad se ejecuta:
@@ -68,8 +67,8 @@ python -m pip install requests --index-url http://nexus.prod.uci.cu/repository/p
 ## Estructura del proyecto
 
 ```
-xpip-cu/
-├── xpip-cu/
+xcu/
+├── xcu/
 │   ├── __init__.py
 │   └── main.py
 ├── README.md
