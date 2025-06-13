@@ -1,6 +1,6 @@
 [project]
 name = "xcu"
-version = "0.0.2"
+version = "1.0.0"
 description = "Librería para facilitar la instalación de paquetes de python en Cuba sin gastar megas"
 authors = [
   { name="KeimaSenpai", email="KeimaSenpai@proton.me" }

@@ -11,6 +11,7 @@
 - ✅ Soporte para todos los comandos de pip
 - ✅ Instalación de paquetes sin gasto de megas
 - ✅ Instalación sencilla
+- ✅ Inicia proyecto con simples plantillas
 
 ## Instalación
 
@@ -29,6 +30,16 @@ pip install xcu
 ## Uso
 
 Una vez instalado, puedes usar `xcu` como si fuera `pip`:
+
+### Iniciar un proyecto
+```bash
+xcu init Mi-proyecto
+```
+
+### Para iniciarlo desde la carpeta inicial
+```bash
+xcu init .
+```
 
 ### Instalar un paquete
 ```bash
