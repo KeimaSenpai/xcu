@@ -1,3 +1,4 @@
+![xcu](https://github.com/user-attachments/assets/1c3e9cc6-645f-448f-85b6-476ae4095f66)
 # xcu - Instalador de paquetes Python para Cuba 🇨🇺
 
 `xcu` es un wrapper de pip que facilita la instalación de paquetes de Python desde el repositorio PyPI de Cuba, eliminando la necesidad de escribir comandos largos con parámetros de configuración.
