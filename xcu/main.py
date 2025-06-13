@@ -8,6 +8,7 @@ import sys
 import subprocess
 import argparse
 import shutil
+import tempfile
 
 # Configuración del repositorio cubano
 CUBA_INDEX_URL = "http://nexus.prod.uci.cu/repository/pypi-proxy/simple/"
@@ -16,12 +17,12 @@ CUBA_TRUSTED_HOST = "nexus.prod.uci.cu"
 TEMPLATES = {
     "telegram-bot": {
         "python-telegram-bot": {
-            "simple": "https://github.com/KeimaSenpai/xcu/plantillas/telegram-bot/python-telegram-bot/simple",
-            "mongodb": "https://github.com/KeimaSenpai/xcu/plantillas/telegram-bot/python-telegram-bot/mongodb"
+            "simple": "https://github.com/KeimaSenpai/python-telegram-bot-template",
+            # "mongodb": "https://github.com/KeimaSenpai/"
         },
         "kurigram": {
-            "simple": "https://github.com/KeimaSenpai/xcu/plantillas/telegram-bot/kurigram/simple",
-            "mongodb": "https://github.com/KeimaSenpai/xcu/plantillas/telegram-bot/kurigram/mongodb"
+            "simple": "https://github.com/KeimaSenpai/",
+            # "mongodb": "https://github.com/KeimaSenpai/"
         }
     }
 }
@@ -29,20 +30,51 @@ TEMPLATES = {
 # Clonado de repos de github con las plantillas
 def clone_template(repo_url, destination):
     """
-    Clona un repositorio template en el destino
+    Clona un repositorio template en el destino usando una carpeta temporal
     """
+    temp_dir = None
     try:
-        subprocess.run(["git", "clone", repo_url, destination], check=True)
-        # Eliminar el directorio .git para empezar limpio
-        shutil.rmtree(os.path.join(destination, ".git"), ignore_errors=True)
+        # Crear directorio temporal
+        temp_dir = tempfile.mkdtemp(prefix="xcu_clone_")
+        
+        # Clonar en el directorio temporal
+        subprocess.run(["git", "clone", repo_url, temp_dir], check=True)
+        
+        # Eliminar el directorio .git del repo clonado
+        git_dir = os.path.join(temp_dir, ".git")
+        if os.path.exists(git_dir):
+            shutil.rmtree(git_dir, ignore_errors=True)
+        
+        # Crear el directorio de destino si no existe
+        os.makedirs(destination, exist_ok=True)
+        
+        # Copiar todos los archivos del directorio temporal al destino
+        for item in os.listdir(temp_dir):
+            src = os.path.join(temp_dir, item)
+            dst = os.path.join(destination, item)
+            
+            if os.path.isdir(src):
+                shutil.copytree(src, dst, dirs_exist_ok=True)
+            else:
+                shutil.copy2(src, dst)
+        
         print(f"✅ Proyecto creado en: {destination}")
         return True
+        
     except subprocess.CalledProcessError as e:
         print(f"❌ Error al clonar el repositorio: {e}")
         return False
     except Exception as e:
         print(f"❌ Error inesperado: {e}")
         return False
+    finally:
+        # Limpiar el directorio temporal
+        if temp_dir and os.path.exists(temp_dir):
+            try:
+                shutil.rmtree(temp_dir)
+            except Exception as e:
+                print(f"⚠️ Advertencia: No se pudo eliminar el directorio temporal {temp_dir}: {e}")
+
 
 def init_project(args):
     """
@@ -82,7 +114,7 @@ def init_project(args):
             
             print("\n💾 ¿Quieres incluir base de datos?")
             print("1) Simple (sin base de datos)")
-            print("2) MongoDB")
+            # print("2) MongoDB")
             
             db_choice = input("\nSelección (1-2): ").strip()
             
@@ -178,6 +210,10 @@ def main():
     # Pasar todos los argumentos a pip
     args = sys.argv[1:]
     
+    # Manejar el comando init
+    if args[0] == "init":
+        return init_project(args)
+
     # Mostrar información adicional para comandos install
     if args and args[0] == "install":
         print(f"🇨🇺 Instalando desde el repositorio cubano: {CUBA_INDEX_URL}")

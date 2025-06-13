@@ -1,12 +1,13 @@
 [project]
 name = "xcu"
-version = "1.0.0"
+version = "1.0.3a"
 description = "Librería para facilitar la instalación de paquetes de python en Cuba sin gastar megas"
 authors = [
   { name="KeimaSenpai", email="KeimaSenpai@proton.me" }
 ]
 readme = "README.md"
 license = { file="LICENSE" }
+keywords = ["Cuba", "pip", "packages"]
 
 [build-system]
 requires = ["setuptools", "wheel", "setuptools_scm"]
@@ -21,3 +22,7 @@ Community = "https://t.me/KeimaSenpai"
 
 [project.scripts]
 xcu = "xcu.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["plantillas*"]
