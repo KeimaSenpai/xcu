@@ -1,0 +1,23 @@
+[project]
+name = "xcu"
+version = "0.0.2"
+description = "Librería para facilitar la instalación de paquetes de python en Cuba sin gastar megas"
+authors = [
+  { name="KeimaSenpai", email="KeimaSenpai@proton.me" }
+]
+readme = "README.md"
+license = { file="LICENSE" }
+
+[build-system]
+requires = ["setuptools", "wheel", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/KeimaSenpai"
+Documentation = "https://github.com/KeimaSenpai"
+Source = "https://github.com/KeimaSenpai"
+Issues = "https://github.com/KeimaSenpai"
+Community = "https://t.me/KeimaSenpai"
+
+[project.scripts]
+xcu = "xcu.main:main"
