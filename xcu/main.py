@@ -124,6 +124,10 @@ def init_project(args):
             
             template_url = TEMPLATES["telegram-bot"][framework_name][db_type]
             
+            if framework_name == "kurigram" and db_type == "mongodb":
+                print("🚧 Plantilla con Kurigram y MongoDB en desarrollo...")
+                return 1
+
             # Clonar el repositorio
             if clone_template(template_url, project_path):
                 print("\n📦 Instalando dependencias...")
